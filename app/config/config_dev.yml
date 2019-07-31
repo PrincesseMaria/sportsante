@@ -37,7 +37,7 @@ twig:
 assetic:    
     use_controller: false
 swiftmailer:
-    transport: localhost
+    transport: gmail
     username:  '%mailer_user%'
     password:  '%mailer_password%'
     

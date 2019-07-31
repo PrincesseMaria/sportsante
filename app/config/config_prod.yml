@@ -20,6 +20,6 @@ monolog:
         console:
             type: console
 swiftmailer:
-    transport: localhost
+    transport: gmail
     username:  '%mailer_user%'
     password:  '%mailer_password%'
