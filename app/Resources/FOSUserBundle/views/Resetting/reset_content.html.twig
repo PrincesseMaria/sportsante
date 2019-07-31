@@ -1,0 +1,43 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="container">
+    <div class="row">
+
+        <br/><br/><br/>
+
+        <div class="col-lg-offset-4 col-sm-4">
+
+            {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'fos_user_resetting_reset' } }) }}
+           
+
+            <div class="form-group row">
+
+                {{ form_label(form.plainPassword.first, 'Nouveau mot de passe', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.plainPassword.first)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.plainPassword.first) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <!--NOM-->
+
+            <!--PRENOM-->
+            <div class="form-group row">
+                {{ form_label(form.plainPassword.second, 'Répéter le nouveau mot de passe', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+
+                {% if  form_errors(form.plainPassword.second)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.plainPassword.second) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+
+            </div> 
+            <div>
+                <input type="submit" value="{{ 'resetting.reset.submit'|trans }}" class="btn-submit"/>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>

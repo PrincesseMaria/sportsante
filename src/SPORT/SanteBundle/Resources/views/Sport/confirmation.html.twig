@@ -1,0 +1,54 @@
+{# empty Twig template #}
+
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block Banner %}
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <br/><br/><br/>
+
+        <h2>Abonnement</h2>
+        <p> {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+            <div class="flash-{{ type }}">
+                <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                    <strong>   {{message}}     </strong> 
+                </div>
+            </div>
+        {% endfor %}
+        {% endfor %}</p>            
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Nombre de Séance</th>
+                    <th>Prix</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>{{abonnement.Datedebut|date("d/m/Y")}}</th>
+                    <th>{{abonnement.Datefin|date("d/m/Y")}}</th>
+                    <th>{{abonnement.Nombreseance}}</th>
+                    <th>{{abonnement.Prixseance}}</th>
+                </tr>
+                <tr>
+                   
+                    <th colspan="4"><a href="{{path('sport_sante_seancepage')}}"><span class="glyphicon glyphicon-arrow-left"></span> </a></th>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    {% endblock %}
+
+        {% block javascripts %} {{ parent() }}{% endblock %}

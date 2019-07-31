@@ -1,0 +1,24 @@
+admincreneau_index:
+    path:     /creneau
+    defaults: { _controller: "SPORTSanteBundle:Creneauadmin:index" }
+    methods:  GET
+
+admincreneau_show:
+    path:     /{id}/showcreneau
+    defaults: { _controller: "SPORTSanteBundle:Creneauadmin:show" }
+    methods:  GET
+
+admincreneau_new:
+    path:     /newcreneau
+    defaults: { _controller: "SPORTSanteBundle:Creneauadmin:new" }
+    methods:  [GET, POST]
+
+admincreneau_edit:
+    path:     /{id}/editcreneau
+    defaults: { _controller: "SPORTSanteBundle:Creneauadmin:edit" }
+    methods:  [GET, POST]
+
+admincreneau_delete:
+    path:     /{id}/deletecreneau
+    defaults: { _controller: "SPORTSanteBundle:Creneauadmin:delete" }
+    methods:  DELETE

@@ -1,0 +1,136 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+
+
+{% extends "SPORTLocationBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{%  set TPrixHT = 0 %}
+{% set  TTTCPrixHT =0 %}
+{% set  refTva = {} %}
+
+
+{% block content %}
+
+    <br/>
+    <br/>
+    <div class="container">
+
+        <div class="row">
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <!-- /.row -->
+            <h2 class="my-4">Facture</h2>
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                            <strong>   {{message}}     </strong> 
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <div class="col-lg-9">
+                <div class="card mt-4">
+                    <form action="{{""}}" method="get">
+                        <table class="table">
+                            {% if materiel|length==0 %}
+                                <tr>
+                                    <th colpan="4"><h5>Votre Panier est vide!!!</h5></th>
+                                </tr>
+                            {% elseif materiel|length>0 %}    
+                                <thead>
+                                    <tr>
+                                        <th>Références</th>
+                                        <th>Quantité</th>
+                                        <th>Prix unitaire</th>
+                                        <th>Total HT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in materiel %}
+                                        <tr>
+                                            <th scope="row">{{item.MaterielNom}}</th>
+                                            <td>
+                                                {{panier[item.id]}}
+
+                                            </td>
+                                            <td>{{item.MaterielPrixlocation}}</td>
+                                            <td>{{panier[item.id]*item.MaterielPrixlocation}}</td>
+                                        </tr>
+                                        {% set TPrixHT =TPrixHT+(panier[item.id]*item.MaterielPrixlocation) %}
+                                        {% set TTTCPrixHT =TTTCPrixHT+(panier[item.id]*item.MaterielPrixlocation)|tva(item.TvaPrix()) %}
+
+
+                                        {% set refTva = refTva|merge({ ('%' ~ item.TvaPrix()*100) : item.TvaPrix() }) %}
+
+                                    {% endfor %}
+
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="span3 pull-left">
+                                                <dl class="pull-left">
+                                                    <dt><h4>Adresse de livraison</h4></dt>
+                                                    <dt>{{livraison.prenom }} {{ livraison.nom }}</dt>
+                                                    <dt>{{ livraison.adresse }}</dt>
+                                                    <dt>{{ livraison.cpostale }} {{ livraison.ville }} - {{ livraison.pays }}</dt>
+                                                </dl>
+                                            </div>
+
+                                            <div class="span3 pull-left">
+                                                <dl class="pull-left">
+                                                    <dt><h4>Adresse de facturation</h4></dt>
+                                                    <dt>{{ facturation.prenom }} {{ facturation.nom }}</dt>
+                                                    <dt>{{ facturation.adresse }}</dt>
+                                                    <dt>{{ facturation.cpostale }} {{ facturation.ville }} - {{ facturation.pays }}</dt>
+                                                </dl>
+                                            </div>
+
+                                            <a href="{{path('sport_location_livraison')}}" class="btn btn-info btn-lg">
+                                                Retour </a>
+                                        </th>
+                                        <td>
+                                        </td>
+                                        <td><h4>Total HT</h4>{% for key, tva in refTva %}
+                                            <h4>TVA{{ key }}</h4> {% endfor %}
+                                            <h4>Total TTC</h4>
+
+                                        </td>
+                                        <td><h4>{{TPrixHT~"€"}}</h4>{% for key, tva in refTva %}                                        
+                                            <h4>{{ tva~"€" }}</h4> {% endfor %}                            
+                                            <h4>{{TTTCPrixHT~"€"}}</h4>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            {% endif %}
+                        </table>
+                    </form>
+
+                </div>
+                <!-- Page Features -->
+            </div>
+            <!-- row-->
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+                <div class="navigation">
+                    {{ knp_pagination_render(materiel) }} 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

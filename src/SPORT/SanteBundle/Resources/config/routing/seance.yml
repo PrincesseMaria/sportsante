@@ -1,0 +1,24 @@
+adminseance_index:
+    path:     /seanceadmin
+    defaults: { _controller: "SPORTSanteBundle:Seanceadmin:index" }
+    methods:  GET
+
+adminseance_show:
+    path:     /{id}/showseance
+    defaults: { _controller: "SPORTSanteBundle:Seanceadmin:show" }
+    methods:  GET
+
+adminseance_new:
+    path:     /newseance
+    defaults: { _controller: "SPORTSanteBundle:Seanceadmin:new" }
+    methods:  [GET, POST]
+
+adminseance_edit:
+    path:     /{id}/editseance
+    defaults: { _controller: "SPORTSanteBundle:Seanceadmin:edit" }
+    methods:  [GET, POST]
+
+adminseance_delete:
+    path:     /{id}/deleteseance
+    defaults: { _controller: "SPORTSanteBundle:Seanceadmin:delete" }
+    methods:  DELETE

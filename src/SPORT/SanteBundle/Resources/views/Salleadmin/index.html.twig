@@ -1,0 +1,66 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+
+    <h1>Admin Salle</h1>
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                    <strong>   {{message}}     </strong> 
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Adresse</th>
+                <th>Ville</th>
+                <th>Code postale</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for salle in salles %}
+                <tr>
+                    <td><a href="{{ path('adminsalle_show', { 'id': salle.id }) }}">{{ salle.id }}</a></td>
+                    <td>{{ salle.nomSalle }}</td>
+                    <td>{{ salle.adresseSalle }}</td>
+                    <td>{{ salle.villeSalle }}</td>
+                    <td>{{ salle.cpSalle }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('adminsalle_show', { 'id': salle.id }) }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('adminsalle_edit', { 'id': salle.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td> </td><td> </td><td> </td><td> </td>
+                <td colspan="3"><button type="button" class="btn btn-primary"><a href="{{ path('adminsalle_new') }}"> Créer une nouvelle salle</a></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3">
+            <div class="navigation">
+                {{ knp_pagination_render(salles) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

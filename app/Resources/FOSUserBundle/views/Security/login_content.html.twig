@@ -1,0 +1,58 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div  class="alert alert-danger"> 
+
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    </div>
+{% endif %}
+
+<!-- <form action="{{ path("fos_user_security_check") }}" method="post">
+{#  {% if csrf_token %}
+      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+  {% endif %} 
+
+  <label for="username">{{ 'security.login.username'|trans }}</label>
+  <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+
+  <label for="password">{{ 'security.login.password'|trans }}</label>
+  <input type="password" id="password" name="_password" required="required" />
+
+  <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+  <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>  #}
+
+  <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+</form>-->
+
+
+<div class="container">
+    <div class="row">
+        
+        <br/><br/><br/>
+       
+        <div class="col-lg-offset-4 col-sm-3">
+            <form action="{{ path("fos_user_security_check") }}" method="post" class="login">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                {% endif %}
+                 <h1> Login </h1>
+                <div class="form-group">
+                    <label for="email">{{ 'security.login.username'|trans }}</label>
+                    
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="{{ 'security.login.username'|trans }}" required="required"  class="form-control" >
+                </div>
+                <div class="form-group">
+                    <label for="pwd">{{ 'security.login.password'|trans }}</label>
+                    <input type="password" class="form-control" id="password" name="_password" placeholder="{{ 'security.login.password'|trans }}" required="required">
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" id="remember_me" name="_remember_me" >  {{ 'security.login.remember_me'|trans }}</label><br/>
+                    <a href={{ path('fos_user_resetting_request') }}> Mot de passe oublié</a>
+                </div>
+                <button type="submit" class="btn-submit">{{ 'security.login.submit'|trans }}</button>
+            </form>
+
+        </div>
+    </div>
+    
+</div>

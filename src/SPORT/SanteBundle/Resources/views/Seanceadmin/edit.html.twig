@@ -1,0 +1,72 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                        <strong>   {{message}}     </strong> 
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div class="row">
+                    
+                    <div class="col-sm-12" >
+                        <h1>Modifier la séance</h1>
+
+                        {{ form_start(edit_form) }}
+
+                        <div class="edit_form-group row">
+                            {{ form_label(edit_form.jourSeance, 'Jour', {'label_attr': {'class': ''}}) }}
+                             {% if  form_errors(edit_form.jourSeance)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(edit_form.jourSeance) }}</strong> 
+                            </div> 
+                        {% endif %}
+                            {{ form_widget(edit_form.jourSeance, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="edit_form-group row">
+                            {{ form_label(edit_form.dateSeance, 'Date', {'label_attr': {'class': ''}}) }}
+                            {% if  form_errors(edit_form.dateSeance)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(edit_form.dateSeance) }}</strong> 
+                            </div> 
+                        {% endif %}
+                            {{ form_widget(edit_form.dateSeance, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+
+
+                        <div class="edit_form-group row">
+                            {{ form_label(edit_form.salle, 'Ville', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(edit_form.salle, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                             <br/>
+                        <input type="submit" colspan="2" class="btn-submit"value="Modifier" />
+                        {{ form_end(edit_form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" ><ul>
+                    <li>
+                        <a href="{{ path('adminseance_index') }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                    </li>
+                    <li>
+                        {{ form_start(delete_form) }}
+                        <button type="submit" class="btn btn-default btn-sm">
+                            <span class="glyphicon glyphicon-trash"></span>  
+                        </button>
+
+                        {{ form_end(delete_form) }}
+                    </li>
+                </ul></div>
+        </div>
+   
+
+{% endblock %}

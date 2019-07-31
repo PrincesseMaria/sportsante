@@ -1,0 +1,1 @@
+;$(document).ready(function(){$('.forgot-pass').click(function(s){$('.pr-wrap').toggleClass('show-pass-reset')});$('.pass-reset-submit').click(function(s){$('.pr-wrap').removeClass('show-pass-reset')})});

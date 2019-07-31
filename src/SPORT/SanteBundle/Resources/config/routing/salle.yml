@@ -1,0 +1,24 @@
+adminsalle_index:
+    path:     /salle
+    defaults: { _controller: "SPORTSanteBundle:Salleadmin:index" }
+    methods:  GET
+
+adminsalle_show:
+    path:     /{id}/showsalle
+    defaults: { _controller: "SPORTSanteBundle:Salleadmin:show" }
+    methods:  GET
+
+adminsalle_new:
+    path:     /new
+    defaults: { _controller: "SPORTSanteBundle:Salleadmin:new" }
+    methods:  [GET, POST]
+
+adminsalle_edit:
+    path:     /{id}/editsalle
+    defaults: { _controller: "SPORTSanteBundle:Salleadmin:edit" }
+    methods:  [GET, POST]
+
+adminsalle_delete:
+    path:     /{id}/deletesalle
+    defaults: { _controller: "SPORTSanteBundle:Salleadmin:delete" }
+    methods:  DELETE

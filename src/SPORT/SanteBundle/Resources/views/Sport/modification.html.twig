@@ -1,0 +1,42 @@
+{# empty Twig template #}
+
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <br/><br/><br/>
+        <div class="row">
+            <div class="col-lg-3"><br/> <p> veuillez prendre un abonnement en fonction du nombre de séance que vous désirez, utilisable pendant une année.
+                <br/><h2> 2.5€/séance</h2>
+                </p>
+            </div>
+            <div class="col-lg-offset-5 col-lg-3">
+
+                {{ form_start(form) }}
+                <h2>Modification de l'abonnement</h2>
+                <div class="edit_form-group row">
+                    {{ form_label(form.nombreseance, 'Nombre de séance', {'label_attr': {'class': ''}}) }}
+                    {% if  form_errors(form.nombreseance)  is not empty %}
+                        <div class="alert alert-danger" role="alert">
+                            <strong>{{ form_errors(form.nombreseance) }}</strong> 
+                        </div> 
+                    {% endif %}
+                    {{ form_widget(form.nombreseance, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <br/>
+                <input type="submit"  class="btn-submit" value="S'abonner" />
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

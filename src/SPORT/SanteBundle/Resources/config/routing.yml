@@ -1,0 +1,33 @@
+sport_sante_admin:
+    resource: "@SPORTSanteBundle/Resources/config/routing/salle.yml"
+    prefix:   /admin
+
+sport_sante_homepage:
+    path:     /homepage
+    defaults: { _controller: SPORTSanteBundle:Sport:index }
+sport_sante_seancepage:
+    path:     /seance
+    defaults: { _controller: SPORTSanteBundle:Sport:seance }
+sport_sante_courspage:
+    path:     /cours/{id}
+    defaults: { _controller: SPORTSanteBundle:Sport:cours }
+    requirements:
+        id: \d+
+
+sport_sante_reservationpage:
+    path:     /reservation/{id}
+    defaults: { _controller: SPORTSanteBundle:Sport:reservation }
+    requirements:
+        id: \d+
+sport_sante_abonnement:
+    path:     /abonnement
+    defaults: { _controller: SPORTSanteBundle:Sport:abonnement }
+    methods:  [GET, POST]
+sport_sante_confirmation:
+    path:     /confirmation
+    defaults: { _controller: SPORTSanteBundle:Sport:confirmation }
+sport_sante_modification:
+    path:     /modification/{id}
+    defaults: { _controller: SPORTSanteBundle:Sport:modification }
+    requirements:
+        id: \d+

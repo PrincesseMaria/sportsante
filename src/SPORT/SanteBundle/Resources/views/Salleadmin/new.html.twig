@@ -1,0 +1,78 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+
+
+    <div class="row">
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="col-sm-12" >
+                    <h1>Créer une nouvelle salle</h1>
+
+                    {{ form_start(form) }}
+
+                    <div class="form-group row">
+                        {{ form_label(form.nomSalle, 'Nom', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.nomSalle)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.nomSalle) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(form.nomSalle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.adresseSalle, 'Adresse', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.adresseSalle)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.adresseSalle) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(form.adresseSalle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(form.villeSalle, 'Ville', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.villeSalle)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.villeSalle) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(form.villeSalle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group row">
+                        {{ form_label(form.cpSalle, 'Code postale', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.cpSalle)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.cpSalle) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(form.cpSalle, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group row">
+                        {{ form_label(form.latitude, 'Latitude', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(form.latitude, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group row">
+                        {{ form_label(form.longitude, 'Longitude', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(form.longitude, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <br/>
+                    <input type="submit" colspan="2" class="btn-submit"value="Créer" />
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4"><ul>
+                <li>
+                    <a href="{{ path('adminsalle_index') }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                </li>
+            </ul></div>
+    </div>
+
+
+
+{% endblock %}

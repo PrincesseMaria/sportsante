@@ -1,0 +1,135 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+
+
+
+<div class="container">
+    <div class="row">
+
+        <br/><br/>
+
+
+        <div class="col-lg-offset-4 col-sm-3">
+            <!--<form class="form-horizontal" role="form">-->
+            {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+            {% if form_errors(form)|length !=0 %}
+                <div class="alert alert-danger"> 
+                    <strong>{{ form_errors(form) }}</strong>
+                </div>
+            {% endif %}
+            <h2>Formulaire d'inscription</h2>
+            {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                            <strong>   {{message}}     </strong> 
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+
+            <!--NOM-->
+            <div class="form-group row">
+
+                {{ form_label(form.nom, 'Nom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.nom)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.nom) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <!--NOM-->
+
+            <!--PRENOM-->
+            <div class="form-group row">
+                {{ form_label(form.prenom, 'Prenom', {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+
+                {% if  form_errors(form.prenom)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.prenom) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+
+            </div> <!--PRENOM-->
+
+
+            <!--USERNAME-->
+            <div class="form-group row">
+
+                {{ form_label(form.username, "Nom d'utilisateur", {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.username)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.username) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <!--USERNAME-->
+
+            <!--ADresse-->
+            <div class="form-group row">
+
+                {{ form_label(form.adresse, "Adresse", {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.adresse)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.adresse) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+
+            </div> <!--Adresse-->
+
+
+            <!--Email-->
+            <div class="form-group row">
+
+                {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+
+                {% if  form_errors(form.email)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.email) }}</strong> 
+                    </div> 
+                {% endif %}
+
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+
+            </div> <!--email-->
+
+            <!--Password-->
+            <div class="form-group row">
+                {{ form_label(form.plainPassword.first, "Mot de passe", {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.plainPassword.first)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.plainPassword.first) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <!--password-->
+
+            <br/>
+            <!--Répéter Password-->
+            <div class="form-group row">
+                {{ form_label(form.plainPassword.second, "Répéter le Mot de passe", {'label_attr': {'class': 'col-2 col-form-label'}}) }}
+                {% if  form_errors(form.plainPassword.second)  is not empty %}
+                    <div class="alert alert-danger" role="alert">
+                        <strong>{{ form_errors(form.plainPassword.second) }}</strong> 
+                    </div> 
+                {% endif %}
+                {{ form_widget(form.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            {{ form_rest(form) }}
+            <div class="form-group row">
+
+                <button type="submit" value="{{ 'registration.submit'|trans }}" class="btn-submit">{{ 'registration.submit'|trans }}</button> 
+
+
+            </div >
+
+            {{ form_end(form) }} <!-- /form -->
+        </div> 
+    </div>
+</div><!-- ./container -->

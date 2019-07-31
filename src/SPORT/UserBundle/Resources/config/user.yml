@@ -1,0 +1,28 @@
+adminuser_index:
+    path:     /user/adminuser
+    defaults: { _controller: "SPORTUserBundle:User:index" }
+    methods:  GET
+
+adminuser_show:
+    path:     /{id}/user/adminusershow
+    defaults: { _controller: "SPORTUserBundle:User:show" }
+    methods:  GET
+
+adminuser_new:
+    path:     /user/adminusernew
+    defaults: { _controller: "SPORTUserBundle:User:new" }
+    methods:  [GET, POST]
+
+adminuser_edit:
+    path:     /{id}/user/adminuseredit
+    defaults: { _controller: "SPORTUserBundle:User:edit" }
+    methods:  [GET, POST]
+
+adminuser_delete:
+    path:     /{id}/user/adminuserdelete
+    defaults: { _controller: "SPORTUserBundle:User:delete" }
+    methods:  DELETE
+admin_dashboard:
+    path:     /admin
+    defaults: { _controller: "SPORTUserBundle:User:dashboard" }
+    

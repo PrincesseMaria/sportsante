@@ -1,0 +1,68 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+        {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    <div  {% if type=="notification" %}class="alert alert-info" {% elseif type=="error" %} class="alert alert-danger"{% endif %}> 
+                        <strong>   {{message}}     </strong> 
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div class="row">
+                    
+                    <div class="col-sm-12">
+                        <h1>Créer un nouveau  créneau</h1>
+
+                        {{ form_start(form) }}
+
+                        <div class="edit_form-group row">
+                            {{ form_label(form.nomActiviteCreneau, 'Nom Activité', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.nomActiviteCreneau, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+
+                        <div class="edit_form-group row">
+                            {{ form_label(form.nbplaceCreneau, 'Nombre de place', {'label_attr': {'class': ''}}) }}
+                            {% if  form_errors(form.nbplaceCreneau)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.nbplaceCreneau) }}</strong> 
+                            </div> 
+                        {% endif %}
+                            {{ form_widget(form.nbplaceCreneau, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="edit_form-group row">
+                            {{ form_label(form.heuredCreneau, 'Heure Début', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.heuredCreneau, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="edit_form-group row">
+                            {{ form_label(form.heurefCreneau, 'Heure Fin', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.heurefCreneau, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="edit_form-group row">
+                            {{ form_label(form.seance, 'Séance', {'label_attr': {'class': ''}}) }}
+                            {{ form_widget(form.seance, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                         <br/>
+                        <input type="submit" colspan="2" class="btn-submit"value="Créer" />
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4" ><ul>
+                    <li>
+                        <a href="{{ path('admincreneau_index') }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                    </li>
+                    
+                </ul></div>
+        </div>
+  
+{% endblock %}

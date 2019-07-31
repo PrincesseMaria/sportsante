@@ -1,0 +1,98 @@
+{# empty Twig template #}
+{% extends "SPORTLocationBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="container">
+        <h1>Hello World!</h1>
+        <div class="row">
+            <div class="col-sm-6" style="">
+                {% if user.adresses|length != 0 %}
+                    <h2>Livraison</h2>
+
+
+                    <form action="{{path('sport_location_validation')}}" method="POST">
+
+                        <h4>Adresse de livraison</h4>
+                        {% for adresse in user.adresses %}
+                            <label class="radio">
+                                <input type="radio" name="livraison" value="{{ adresse.id }}" {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                {{ adresse.adresse }}, {{ adresse.cpostale }} {{ adresse.ville }} - {{ adresse.pays }} <a href="{{ path('sport_location_livraisonsupression', { 'id' : adresse.id }) }}"><span class="glyphicon glyphicon-trash"></span></i></a>
+                                <br />{{ adresse.prenom }} {{ adresse.nom }}
+                            </label>
+                        {% endfor %}
+
+                        <br /><br />
+
+                        <h4>Adresse de facturation</h4>
+
+                        {% for adresse in user.adresses %}
+                            <label class="radio">
+                                <input type="radio" name="facturation" value="{{ adresse.id }}" {% if loop.index0 == 0 %}checked="checked"{% endif %}>
+                                {{ adresse.adresse }}, {{ adresse.cpostale }} {{ adresse.ville }} - {{ adresse.pays }} <a href="{{ path('sport_location_livraisonsupression', { 'id' : adresse.id }) }}"><span class="glyphicon glyphicon-trash"></span></a>
+                                <br />{{ adresse.prenom }} {{ adresse.nom }}
+                            </label>
+                        {% endfor %}
+
+
+                        <br />
+
+                        <button class="btn btn-primary">Valider mes adresses</button>
+                    </form>
+                {% endif %}
+            </div>
+            <div class="col-sm-6" style="">
+                <h4>Ajouter une nouvelle adresse</h4>
+
+                {{ form_start(form, {'method': 'post', 'action': path('sport_location_livraison'), 'attr': {'class': ''}}) }}
+                <div class="form-group">
+
+                    {{ form_label(form.nom, 'Nom', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_label(form.prenom, 'Prenom', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_label(form.adresse, 'Adresse', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.adresse, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_label(form.cpostale, 'Code Postale', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.cpostale, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_label(form.ville, 'Ville', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.ville, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="form-group">
+
+                    {{ form_label(form.pays, 'Pays', {'label_attr': {'class': ''}}) }}
+                    {{ form_widget(form.pays, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <button class="btn btn-primary" type="submit">Ajouter</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+                <br/><br/>
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

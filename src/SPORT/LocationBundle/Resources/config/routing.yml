@@ -1,0 +1,49 @@
+sport_location_admin:
+    resource: "@SPORTLocationBundle/Resources/config/routing/livraison.yml"
+    prefix:   /admin
+
+sport_location_homepage:
+    path:     /location
+    defaults: { _controller: SPORTLocationBundle:Location:location }
+    
+sport_location_materielpage:
+    path:     /materiel/{id}
+    defaults: { _controller: SPORTLocationBundle:Location:materiel }
+    requirements:
+        id: \d+
+        
+sport_location_ajouterpage:
+    path:     /ajouter_materiel/{id}
+    defaults: { _controller: SPORTLocationBundle:Location:ajouter }
+    requirements:
+        id: \d+
+        
+sport_location_infopage:
+    path:     /info_materiel/{id}
+    defaults: { _controller: SPORTLocationBundle:Location:information }
+    requirements:
+        id: \d+
+        
+sport_location_panier:
+    path:     /panier
+    defaults: { _controller: SPORTLocationBundle:Location:panier }
+    
+sport_location_supprimer:
+    path:     /supprimer/{id}
+    defaults: { _controller: SPORTLocationBundle:Location:supprimer }
+    requirements:
+        id: \d+
+sport_location_livraison:
+    path:     /livraison
+    defaults: { _controller: SPORTLocationBundle:Location:livraison}
+sport_location_livraisonsupression:
+    path:     /livraison/{id}
+    defaults: { _controller: SPORTLocationBundle:Location:livraisonsup}
+    requirements:
+        id: \d+
+sport_location_validation:
+    path:     /validation
+    defaults: { _controller: SPORTLocationBundle:Location:validation}
+sport_location_facturation:
+    path:     /facture
+    defaults: { _controller: SPORTLocationBundle:Location:facturation}

@@ -1,0 +1,10 @@
+services:
+    redirectionListener:
+        class: SPORT\SanteBundle\Listener\RedirectionListener
+        arguments:  ["@service_container"]
+          
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }
+#    sport_sante.example:
+#        class: SPORT\SanteBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

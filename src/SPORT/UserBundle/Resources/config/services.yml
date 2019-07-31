@@ -1,0 +1,15 @@
+services:
+  #  sportuser.form.registration:
+   #      class: SPORT\UserBundle\Form\RegistrationType
+    #     tags:
+    #        - { name: form.type, alias: sport_user_registration }
+#    sport_user.example:
+#        class: SPORT\UserBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    redirectionListener:
+        class: SPORT\UserBundle\Listener\RedirectionuserListener
+        arguments:  ["@service_container"]
+          
+        tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest }

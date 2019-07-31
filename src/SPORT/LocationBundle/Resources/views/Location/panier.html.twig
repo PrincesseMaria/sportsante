@@ -1,0 +1,122 @@
+{# empty Twig template #}
+{# empty Twig template #}
+
+
+{% extends "SPORTLocationBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{%  set TPrixHT = 0 %}
+{% set  TTTCPrixHT =0 %}
+{% set  refTva = {} %}
+
+
+{% block content %}
+
+    <br/>
+    <br/>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <h1 class="my-4"><br/></h1>
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Catégorie</a>
+                    {% for item in category %}
+                        <a href="{{ path('sport_location_materielpage', {'id':item.id}) }}" class="list-group-item">{{item.CategoryNom }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <!-- /.row -->
+            <h2 class="my-4">Votre panier</h2>
+            <div class="col-lg-9">
+                <div class="card mt-4">
+                    <form action="{{""}}" method="get">
+                        <table class="table">
+                            {% if materiel|length==0 %}
+                                <tr>
+                                    <th colpan="4"><h5>Votre Panier est vide!!!</h5></th>
+                                </tr>
+                            {% elseif materiel|length>0 %}    
+                                <thead>
+                                    <tr>
+                                        <th>Références</th>
+                                        <th>Quantité</th>
+                                        <th>Prix unitaire</th>
+                                        <th>Total HT</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in materiel %}
+                                        <tr>
+                                            <th scope="row">{{item.MaterielNom}}</th>
+                                            <td><select name="qte" id="qte" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+                                                    {% for i in 1..10 %}
+                                                        <option value="{{i}}" {% if(i==panier[item.id]) %} Selected="selected" {% endif %} >{{i}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                                <a href="{{path('sport_location_supprimer',{'id':item.id})}}" class="btn btn-info btn-lg">
+                                                    <span class="glyphicon glyphicon-trash"></span> </a></td>
+                                            <td>{{item.MaterielPrixlocation}}</td>
+                                            <td>{{panier[item.id]*item.MaterielPrixlocation}}</td>
+                                        </tr>
+                                        {% set TPrixHT =TPrixHT+(panier[item.id]*item.MaterielPrixlocation) %}
+                                        {% set TTTCPrixHT =TTTCPrixHT+(panier[item.id]*item.MaterielPrixlocation)|tva(item.TvaPrix()) %}
+
+
+                                        {% set refTva = refTva|merge({ ('%' ~ item.TvaPrix()*100) : item.TvaPrix() }) %}
+
+                                    {% endfor %}
+
+                                    <tr>
+                                        <th scope="row">
+                                            <a href="{{path('sport_location_homepage')}}" class="btn btn-info btn-lg">
+                                                    Continuer votre achat </a>
+                                        </th>
+                                        <td>
+                                        </td>
+                                        <td><h4>Total HT</h4>{% for key, tva in refTva %}
+                                            <h4>TVA{{ key }}</h4> {% endfor %}
+                                            <h4>Total TTC</h4>
+
+                                        </td>
+                                        <td><h4>{{TPrixHT~"€"}}</h4>{% for key, tva in refTva %}                                        
+                                            <h4>{{ tva~"€" }}</h4> {% endfor %}                            
+                                            <h4>{{TTTCPrixHT~"€"}}</h4>
+                                            <a href="{{path('sport_location_livraison')}}" class="btn btn-info btn-lg">
+                                                    Valider le panier </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            {% endif %}
+                        </table>
+                    </form>
+
+                </div>
+                <!-- Page Features -->
+            </div>
+            <!-- row-->
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+                <div class="navigation">
+                    {{ knp_pagination_render(materiel) }} 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

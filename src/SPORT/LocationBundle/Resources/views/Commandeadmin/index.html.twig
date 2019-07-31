@@ -1,0 +1,68 @@
+{% extends "::admin.html.twig" %} 
+
+{% block content %}
+
+    <h1>Admin commande</h1>
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                    <strong>   {{message}}     </strong> 
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Référence</th>
+                <th>Date commande</th>
+                <th>Nom client</th>
+                <th>Prénom client</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for commande in commandes %}
+                <tr{%  if commande.Livraisons is empty %} style="background-color: red;" {% endif%}>
+                    <td><a href="{{ path('admincommande_show', { 'id': commande.id }) }}">{{ commande.id }}</a></td>
+                    <td>{{ commande.commandeIntitule }}</td>
+                    <td>{% if commande.commandeDate %}{{ commande.commandeDate|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ commande.User.Nom }}</td>
+                    <td>{{ commande.User.Prenom }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('admincommande_show', { 'id': commande.id }) }}"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+                            </li>
+
+                           
+                                <li>
+                                    <a href="{{ path('adminlivraison_new', { 'id': commande.id }) }}"><span class="glyphicon glyphicon-road"></span></a>
+                                </li>
+                           
+                            {%  for livraison in commande.Livraisons %}
+                                <li>
+                                    <a href="{{ path('adminlivraison_show', { 'id': livraison.id }) }}"><span class="glyphicon glyphicon-home"></span></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <div class="row">
+
+        <div class="col-md-6 col-md-offset-3">
+            <div class="navigation">
+                {{ knp_pagination_render(commandes) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

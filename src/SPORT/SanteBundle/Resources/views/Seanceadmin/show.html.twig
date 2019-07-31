@@ -1,0 +1,60 @@
+{% extends '::admin.html.twig' %}
+{% block content %}
+    
+
+    
+        <h1>Admin Séance</h1>
+          {% for type, messages in app.session.flashbag.all() %}
+            {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                        <strong>   {{message}}     </strong> 
+                    </div>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Jour</th>
+                    <th>Date</th>
+                    <th>Salle</th>                    
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><a href="{{ path('adminseance_show', { 'id': seance.id }) }}">{{ seance.id }}</a></td>
+                    <td>{{ seance.jourSeance }}</td>
+                    <td>{% if seance.dateSeance %}{{ seance.dateSeance|date('d-m-Y') }}{% endif %}</td>
+                    <td>{{ seance.salle.nomSalle }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                {{ form_start(delete_form) }}
+
+                                <button type="submit" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span> 
+                                </button>
+
+                                {{ form_end(delete_form) }}                            </li>
+                            <li>
+                                <a href="{{ path('adminseance_edit', { 'id': seance.id }) }}"><span class="glyphicon glyphicon-pencil"></span></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td> </td><td> </td><td> </td><td> </td>
+                    <td colspan="3"><button type="button" class="btn btn-primary"><a href="{{ path('adminseance_index') }}">Retour</a></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    
+{% endblock %}

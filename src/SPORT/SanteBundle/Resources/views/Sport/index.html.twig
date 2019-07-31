@@ -1,0 +1,21 @@
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+				{% block stylesheets %}
+					{{ parent() }}
+				{% endblock %}
+
+
+{% block content %}
+   {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    <div  {% if type=="notification" %}class="alert alert-success" {% elseif type!="notification" %} class="alert alert-success"{% endif %}> 
+                        <strong>   {{message}}     </strong> 
+                    </div>
+                </div>
+            {% endfor %}
+            {% endfor %}
+            
+            {{ parent() }}
+{% endblock %}

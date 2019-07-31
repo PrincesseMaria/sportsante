@@ -1,0 +1,12 @@
+admincommande_index:
+    path:     /commandeadmin
+    defaults: { _controller: "SPORTLocationBundle:Commandeadmin:index" }
+    methods:  GET
+
+admincommande_show:
+    path:     /{id}/commandeshow
+    defaults: { _controller: "SPORTLocationBundle:Commandeadmin:show" }
+    methods:  GET
+
+
+

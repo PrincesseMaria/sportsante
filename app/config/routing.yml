@@ -1,0 +1,36 @@
+sport_location:
+    resource: "@SPORTLocationBundle/Resources/config/routing.yml"
+    prefix:   /sportsante
+
+sport_sante:
+    resource: "@SPORTSanteBundle/Resources/config/routing.yml"
+    prefix:   /sportsante
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /sportsante
+    
+admin_salle:
+    resource: "@SPORTSanteBundle/Resources/config/routing/salle.yml"
+    prefix:   /admin
+admin_seance:
+    resource: "@SPORTSanteBundle/Resources/config/routing/seance.yml"
+    prefix:   /admin
+admin_creneau:
+    resource: "@SPORTSanteBundle/Resources/config/routing/creneau.yml"
+    prefix:   /admin
+admin_materiel:
+    resource: "@SPORTLocationBundle/Resources/config/routing/materiel.yml"
+    prefix:   /admin
+admin_category:
+    resource: "@SPORTLocationBundle/Resources/config/routing/category.yml"
+    prefix:   /admin
+admin_user:
+    resource: "@SPORTUserBundle/Resources/config/user.yml"
+    prefix:   /admin
+admin_commande:
+    resource: "@SPORTLocationBundle/Resources/config/routing/commande.yml"
+    prefix:   /admin
+admin_livraison:
+    resource: "@SPORTLocationBundle/Resources/config/routing/livraison.yml"
+    prefix:   /admin

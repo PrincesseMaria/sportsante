@@ -1,0 +1,24 @@
+categoryadmin_index:
+    path:     /categoryadmin
+    defaults: { _controller: "SPORTLocationBundle:Categoryadmin:index" }
+    methods:  GET
+
+categoryadmin_show:
+    path:     /{id}/showcategory
+    defaults: { _controller: "SPORTLocationBundle:Categoryadmin:show" }
+    methods:  GET
+
+categoryadmin_new:
+    path:     /newcategory
+    defaults: { _controller: "SPORTLocationBundle:Categoryadmin:new" }
+    methods:  [GET, POST]
+
+categoryadmin_edit:
+    path:     /{id}/editcategory
+    defaults: { _controller: "SPORTLocationBundle:Categoryadmin:edit" }
+    methods:  [GET, POST]
+
+categoryadmin_delete:
+    path:     /{id}/deletecategory
+    defaults: { _controller: "SPORTLocationBundle:Categoryadmin:delete" }
+    methods:  DELETE

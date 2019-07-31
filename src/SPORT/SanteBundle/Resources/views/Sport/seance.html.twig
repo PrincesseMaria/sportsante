@@ -1,0 +1,106 @@
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script src = "https://maps.googleapis.com/maps/api/js?language=fr"></script>
+
+    <script>
+
+        function Salle(lat, long, adresse) {
+            this.lat = lat;
+            this.long = long;
+            this.adresse = adresse;
+
+        }
+
+        var arro = [];
+        var marker = [];
+        var infowindow = [];
+
+        {% for Salle in salle %}
+            var test = new Salle({{Salle.Latitude}},{{Salle.Longitude}} , "{{Salle.AdresseSalle~" "~Salle.CpSalle~","~Salle.VilleSalle}}");
+                    arro.push(test);
+        {% endfor %}
+            function loadMap() {
+
+                var mapOptions = {
+                    center: new google.maps.LatLng(47.750839, 7.335888),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+
+                var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+                for (var i = 0; i < arro.length; i++) {
+
+                    marker.push(new google.maps.Marker({
+                        position: new google.maps.LatLng(arro[i].lat, arro[i].long),
+                        map: map,
+                        title: arro[i].adresse
+                    }));
+                   //  marker[i].setMap(map);
+                    infowindow.push(new google.maps.InfoWindow({
+                        content: arro[i].adresse
+                    }));
+
+                   var temp=marker[i];
+                    google.maps.event.addListener(temp, 'click', function () {
+                        infowindow[i].open(map,temp);
+                    });
+
+                }
+
+
+            }
+    </script>
+{% endblock %}
+
+{% block Banner %}
+{% endblock %}
+{% block content %}
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <p> {% for type, messages in app.session.flashbag.all() %}
+                {% for message in messages %}
+                <div class="flash-{{ type }}">
+                    <div  {% if type=="notification" %}class="alert alert-success" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                        <strong>   {{message}}     </strong> 
+                    </div>
+                </div>
+            {% endfor %}
+            {% endfor %}</p>  
+                {% for seance in pagination %}
+
+
+
+
+                    <div class="col-sm-4"  style="padding: 2px;">  <a  href="{{ path('sport_sante_courspage', {'id':seance.id}) }}"  class="btn btn-primary" data-toggle="tooltip" title="Veuillez cliquer pour consulter les activités du jour!">
+                            {{ seance.JourSeance}} {{":"}}  {{seance.DateSeance| date('d-m-y') }} <br/>
+                            {{ "Salle" }} {{":"}}  {{seance.Salle.NomSalle() }} <br/>
+                            {{ "Ville"   ~":"~ seance.Salle.VilleSalle}} <br/>
+                            {{ "Adresse" ~":"~ seance.Salle.CpSalle  ~"  "~ seance.Salle.AdresseSalle }} 
+                        </a>
+                    </div>
+
+
+                {% endfor %}
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="navigation">
+                        {{ knp_pagination_render(pagination) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" id = "sample" style = "width:1300px; height:400px;"></div>
+        {% endblock %}
+
+            {% block javascripts %} {{ parent() }}{% endblock %}

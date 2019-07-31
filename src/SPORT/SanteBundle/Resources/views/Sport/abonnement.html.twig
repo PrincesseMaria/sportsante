@@ -1,0 +1,52 @@
+{# empty Twig template #}
+
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+{% block Banner %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <br/><br/><br/>
+        <div class="row">
+            <div class="col-lg-3"><br/> <p> veuillez prendre un abonnement en fonction du nombre de séance que vous désirez, utilisable pendant une année.
+                <br/><h2> 2.5€/séance</h2>
+                </p>
+            </div>
+            <div class="col-lg-offset-5 col-lg-3">
+
+                {{ form_start(form) }}
+                <p> {% for type, messages in app.session.flashbag.all() %}
+                    {% for message in messages %}
+                    <div class="flash-{{ type }}">
+                        <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                            <strong>   {{message}}     </strong> 
+                        </div>
+                    </div>
+                {% endfor %}
+                {% endfor %}</p>  
+                    <h2>Abonnement</h2>
+                    <div class="edit_form-group row">
+                        {{ form_label(form.nombreseance, 'Nombre de séance', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.nombreseance)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.nombreseance) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(form.nombreseance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <br/>
+                    <input type="submit"  class="btn-submit" value="S'abonner" />
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+
+        {% endblock %}
+
+            {% block javascripts %} {{ parent() }}{% endblock %}

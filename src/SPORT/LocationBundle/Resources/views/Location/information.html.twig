@@ -1,0 +1,77 @@
+{# empty Twig template #}
+{# empty Twig template #}
+{# empty Twig template #}
+
+
+{% extends "SPORTLocationBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+
+{% block content %}
+
+    <br/>
+    <br/>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-3">
+                <br/> <br/>
+                <div class="list-group">
+                    <a href="#" class="list-group-item active">Catégorie</a>
+                    {% for item in category %}
+                        <a href="{{ path('sport_location_materielpage', {'id':item.id}) }}" class="list-group-item">{{item.CategoryNom }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+            <!-- /.row -->
+
+            <!-- /.col-lg-3 -->
+
+            <div class="col-lg-9">
+
+                <div class="card mt-4">
+                    <img class="card-img-top img-fluid" src="{{ asset(materiel.image.WebPath) }}" width="900" height="400"alt="">
+                    <div class="card-block">
+                        <h3 class="card-title">{{materiel.MaterielNom}}</h3>
+                        <h4>{{materiel.MaterielPrixlocation|tva(materiel.TvaPrix())}}€</h4>
+                        {% autoescape %}
+                        {{materiel.Description|raw }}
+                        {% endautoescape %}
+                        <form action="{{path('sport_location_ajouterpage',{ 'id' : materiel.id })}}" method="get">
+                           
+                            <p>
+                                <label for="pays">Quantité</label><br />
+
+                                <select name="qte" id="qte" class="custom-select mb-2 mr-sm-2 mb-sm-0" onChange="this.form.submit()">
+                                    {% for i in 1..10 %}
+                                        <option value="{{i}}  ">{{i}}</option>
+                                    {% endfor %}
+                                </select>
+                            </p>
+                            <div>
+                                <input type="submit" value="Ajouter au panier" class="btn btn-primary"/>   
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            <!-- /.col-lg-9 -->
+
+            <!-- row-->
+        </div>
+
+    </div>
+    <br/>
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

@@ -1,0 +1,15 @@
+{# empty Twig template #}
+
+{% extends "::layout.html.twig" %}
+
+{% block stylesheets %} {{ parent() }} {% endblock %}
+{% block Banner %}
+{% endblock %}
+{% block content %}
+    {{ parent() }}
+
+{%endblock%}
+
+{% block javascripts %} {{ parent() }}{% endblock %}
+
+

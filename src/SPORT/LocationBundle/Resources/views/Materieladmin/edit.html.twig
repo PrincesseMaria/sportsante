@@ -1,0 +1,99 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                    <strong>   {{message}}     </strong> 
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="col-sm-12" >
+                    <h1>Modifier le matériel</h1>
+
+                    {{ form_start(edit_form) }}
+
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.materielNom, 'Nom', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.materielNom)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.materielNom) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(edit_form.materielNom, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.materielMarque, 'Marque', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.materielMarque)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.materielMarque) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(edit_form.materielMarque, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.materielPrixlocation, 'Prix', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.materielPrixlocation, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group row">
+                        {{ form_label(edit_form.tvaPrix, 'Tva', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.tvaPrix, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.quantite, 'Quantité', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(form.quantite)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(form.quantite) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(edit_form.quantite, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.category, 'Catégorie', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.category, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form_label(edit_form.image.file, 'Image', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.image.file, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group row">
+                        {{ form_label(edit_form.description, 'description', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.description, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <br/>
+                    <input type="submit" colspan="2" class="btn-submit"value="Modifier" />
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4"><ul>
+                <li>
+                    <a href="{{ path('materieladmin_index') }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span>  
+                    </button>
+
+                    {{ form_end(delete_form) }}
+                </li>
+            </ul></div>
+    </div>
+
+{% endblock %}

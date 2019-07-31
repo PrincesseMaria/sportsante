@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sport & Santé</title>
+        <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+        <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+            <script src="{{ asset('js/jquery.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.js') }}"></script>
+        {% endblock %}
+    </head>
+    <body style="background-color: lightskyblue;  ">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                   
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active"> <a class="navbar-brand" href="#" style="background-color: azure;">ADMIN</a></li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-in"></span> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" style="background-color: lightskyblue;  ">
+            <div class="row" >
+                {% block menu %}
+                    <div class="col-sm-3" style="background-color: lightskyblue;  ">
+                        <nav class="navbar navbar-default sidebar" role="navigation" style="background-color: Black;  ">
+                            <div class="container-fluid" style="background-color: lightskyblue;  ">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>      
+                                </div>
+                                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                                    <ul class="nav navbar-nav">
+                                       
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">List <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a>
+                                            <ul class="dropdown-menu forAnimate" role="menu">
+                                                <li><a href="{{path('adminsalle_index')}}">Salle</a></li>
+                                                <li><a href="{{path('adminseance_index')}}">Séance</a></li>
+                                                <li><a href="{{path('admincreneau_index')}}">Créneau</a></li>
+                                                <li><a href="{{path('categoryadmin_index')}}">Catégorie</a></li>
+                                                <li><a href="{{path('materieladmin_index')}}">Matériel</a></li>
+
+                                            </ul>
+                                        </li>   
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Form <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-pencil"></span></a>
+                                            <ul class="dropdown-menu forAnimate" role="menu">
+                                                <li><a href="{{path('adminsalle_new')}}">Salle</a></li>
+                                                <li><a href="{{path('adminseance_new')}}">Séance</a></li>
+                                                <li><a href="{{path('admincreneau_new')}}">Créneau</a></li>
+                                                <li><a href="{{path('categoryadmin_new')}}">Catégorie</a></li>
+                                                <li><a href="{{path('materieladmin_new')}}">Matériel</a></li>
+
+                                            </ul>
+                                        </li>  
+                                        
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+                                            <ul class="dropdown-menu forAnimate" role="menu">
+                                                <li><a href="{{path('adminuser_new')}}">Créer<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-pencil"></span></a></li>
+                                                <li><a href="{{path('adminuser_index')}}">List<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
+                                               
+
+                                            </ul>
+                                        </li>
+                                        
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Commande <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-shopping-cart"></span></a>
+                                            <ul class="dropdown-menu forAnimate" role="menu">
+                                                
+                                                <li><a href="{{path('admincommande_index')}}">List<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>
+                                               
+
+                                            </ul>
+                                        </li>
+
+                                        <li ><a href="#">Tags<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+
+
+                {% endblock %}
+                <div class="col-sm-9" style="background-color: lightskyblue;">
+                    <!--/ Navigation bar-->
+                    {% block content %}
+                        <!--Modal box-->
+
+                    {%endblock%}
+                </div>
+            </div>
+        </div>
+        <!--/ Contact-->
+        <!--Footer-->
+        {% block footer %}
+
+            <!--/ Footer-->
+        {% endblock %}
+
+       
+    </body>
+</html>

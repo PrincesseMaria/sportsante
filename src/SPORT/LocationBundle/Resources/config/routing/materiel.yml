@@ -1,0 +1,24 @@
+materieladmin_index:
+    path:     /adminmateriel
+    defaults: { _controller: "SPORTLocationBundle:Materieladmin:index" }
+    methods:  GET
+
+materieladmin_show:
+    path:     /{id}/showmateriel
+    defaults: { _controller: "SPORTLocationBundle:Materieladmin:show" }
+    methods:  GET
+
+materieladmin_new:
+    path:     /newmateriel
+    defaults: { _controller: "SPORTLocationBundle:Materieladmin:new" }
+    methods:  [GET, POST]
+
+materieladmin_edit:
+    path:     /{id}/editmateriel
+    defaults: { _controller: "SPORTLocationBundle:Materieladmin:edit" }
+    methods:  [GET, POST]
+
+materieladmin_delete:
+    path:     /{id}/deletemateriel
+    defaults: { _controller: "SPORTLocationBundle:Materieladmin:delete" }
+    methods:  DELETE

@@ -1,0 +1,108 @@
+{# empty Twig template #}
+
+
+{% extends "SPORTSanteBundle::layout.html.twig" %} 
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <script src = "https://maps.googleapis.com/maps/api/js?language=fr"></script>
+
+    <script>
+
+        function Salle(lat, long, adresse) {
+            this.lat = lat;
+            this.long = long;
+            this.adresse = adresse;
+
+        }
+
+        var arro = [];
+        var marker = [];
+        var infowindow = [];
+
+        {% for Salle in salle %}
+            var test = new Salle({{Salle.Latitude}},{{Salle.Longitude}} , "{{Salle.AdresseSalle~" "~Salle.CpSalle~","~Salle.VilleSalle}}");
+                    arro.push(test);
+        {% endfor %}
+            function loadMap() {
+
+                var mapOptions = {
+                    center: new google.maps.LatLng(47.750839, 7.335888),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+
+
+                var map = new google.maps.Map(document.getElementById("sample"), mapOptions);
+                for (var i = 0; i < arro.length; i++) {
+
+                    marker.push(new google.maps.Marker({
+                        position: new google.maps.LatLng(arro[i].lat, arro[i].long),
+                        map: map,
+                        title: arro[i].adresse
+                    }));
+
+                    infowindow.push(new google.maps.InfoWindow({
+                        content: arro[i].adresse
+                    }));
+
+
+                    google.maps.event.addListener(marker[i], 'click', function () {
+                        infowindow[i].open(map, marker[i]);
+                    });
+
+                }
+
+
+            }
+    </script>
+{% endblock %}
+{% block Banner %}
+{% endblock %}
+
+{% block content %}
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+
+    <div class="container">
+        <div class="row">
+            {% if cours is not empty %}
+                {% for cour in cours %}
+
+
+
+                    <div class="col-sm-4"  style="padding: 2px;"> <a href="{{ path('sport_sante_reservationpage', {'id':cour.id}) }}" class="btn btn-primary"> 
+                            {{  cour.seance.salle.nomsalle}}<br />
+                            {{ cour.HeuredCreneau |date('h:i:s') ~"-"~ cour.HeurefCreneau |date('h:i:s')}} <br />  
+                            {{ cour.nomActiviteCreneau}} <br />
+                            {{ "Nombre de places resrantes"~":"~cour.NbplaceCreneau}}
+                        </a></div>
+
+
+                {% endfor %}
+            {% elseif cours is empty  %}
+                <div class="alert alert-info">
+                    <strong>Désolez!</strong> On n'a pas encore programmé pour cette séance.
+                </div>
+
+            {% endif %}
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 col-md-offset-3">
+                <div class="navigation">
+                    {{ knp_pagination_render(cours) }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" id = "sample" style = "width:1300px; height:400px;"></div>
+{% endblock %}
+
+{% block javascripts %} {{ parent() }}{% endblock %}

@@ -1,0 +1,77 @@
+{% extends '::admin.html.twig' %}
+
+{% block content %}
+
+
+
+    {% for type, messages in app.session.flashbag.all() %}
+        {% for message in messages %}
+            <div class="flash-{{ type }}">
+                <div  {% if type=="notification" %}class="alert alert-info" {% elseif type!="notification" %} class="alert alert-danger"{% endif %}> 
+                    <strong>   {{message}}     </strong> 
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    <div class="row">
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="col-sm-12" >
+                    <h1>Modifier le créneau</h1>
+
+                    {{ form_start(edit_form) }}
+
+                    <div class="edit_form-group row">
+                        {{ form_label(edit_form.nomActiviteCreneau, 'Nom Activité', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.nomActiviteCreneau, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+
+                    <div class="edit_form-group row">
+                        {{ form_label(edit_form.nbplaceCreneau, 'Nombre de place', {'label_attr': {'class': ''}}) }}
+                        {% if  form_errors(edit_form.nbplaceCreneau)  is not empty %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>{{ form_errors(edit_form.nbplaceCreneau) }}</strong> 
+                            </div> 
+                        {% endif %}
+                        {{ form_widget(edit_form.nbplaceCreneau, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="edit_form-group row">
+                        {{ form_label(edit_form.heuredCreneau, 'Heure Début', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.heuredCreneau, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="edit_form-group row">
+                        {{ form_label(edit_form.heurefCreneau, 'Heure Fin', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.heurefCreneau, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="edit_form-group row">
+                        {{ form_label(edit_form.seance, 'Séance', {'label_attr': {'class': ''}}) }}
+                        {{ form_widget(edit_form.seance, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <br/>
+
+                    <input type="submit" colspan="2" class="btn-submit"value="Modifier" />
+                    {{ form_end(edit_form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4" ><ul>
+                <li>
+                    <a href="{{ path('admincreneau_index') }}"><span class="glyphicon glyphicon-th-list"></span></a>
+                </li>
+                <li>
+                    {{ form_start(delete_form) }}
+                    <button type="submit" class="btn btn-default btn-sm">
+                        <span class="glyphicon glyphicon-trash"></span>  
+                    </button>
+
+                    {{ form_end(delete_form) }}
+                </li>
+            </ul></div>
+    </div>
+
+{% endblock %}

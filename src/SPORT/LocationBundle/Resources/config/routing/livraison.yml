@@ -1,0 +1,24 @@
+adminlivraison_index:
+    path:     /livraisonadmin
+    defaults: { _controller: "SPORTLocationBundle:Livraisonadmin:index" }
+    methods:  GET
+
+adminlivraison_show:
+    path:     /{id}/livraisonshow
+    defaults: { _controller: "SPORTLocationBundle:Livraisonadmin:show" }
+    methods:  GET
+
+adminlivraison_new:
+    path:     /{id}/livraisonnew
+    defaults: { _controller: "SPORTLocationBundle:Livraisonadmin:new" }
+    methods:  [GET, POST]
+
+adminlivraison_edit:
+    path:     /{id}/livraisonedit
+    defaults: { _controller: "SPORTLocationBundle:Livraisonadmin:edit" }
+    methods:  [GET, POST]
+
+adminlivraison_delete:
+    path:     /{id}/livraisondelete
+    defaults: { _controller: "SPORTLocationBundle:Livraisonadmin:delete" }
+    methods:  DELETE
